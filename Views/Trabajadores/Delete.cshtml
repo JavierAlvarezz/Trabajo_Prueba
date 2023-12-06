@@ -46,9 +46,9 @@
 </style>
 <h1>Borrar</h1>
 
-<h3>¿Estas Seguro de que quieres borrar esto ?</h3>
+<h3>¿Estas Seguro de que quieres eliminar este Registro ?</h3>
 <div>
-    <h4>Trabajador</h4>
+   
     <hr />
     <dl class="container delete-container">
         <dt class = "col-sm-2">
@@ -80,6 +80,13 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdDepartamentoNavigation.NombreDepartamento)
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdProvinciaNavigation.NombreProvincia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdProvinciaNavigation.NombreProvincia)
         </dd>
 
         <dt class="col-sm-2">
@@ -89,12 +96,7 @@
             @Html.DisplayFor(model => model.IdDistritoNavigation.NombreDistrito)
         </dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdProvinciaNavigation.NombreProvincia)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdProvinciaNavigation.NombreProvincia)
-        </dd>
+        
     </dl>
     
     <form asp-action="Delete" onsubmit="return confirm('¿Estás seguro de que deseas borrar esto?');" class="text-center">

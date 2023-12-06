@@ -15,13 +15,13 @@ namespace WebApplication26.Models
         [Required(ErrorMessage = "El campo Nombres es obligatorio.")]
         [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "Solo se permiten letras en el campo Nombres.")]
         public string? Nombres { get; set; }
-        [Required(ErrorMessage = "El campo TipoDocumento es obligatorio.")]
+        [Required(ErrorMessage = "El campo Sexo es obligatorio.")]
         public string? Sexo { get; set; }
-        [Required(ErrorMessage = "El campo TipoDocumento es obligatorio.")]
+        [Required(ErrorMessage = "El campo Departamento es obligatorio.")]
         public int? IdDepartamento { get; set; }
-        [Required(ErrorMessage = "El campo TipoDocumento es obligatorio.")]
+        [Required(ErrorMessage = "El campo Provincia es obligatorio.")]
         public int? IdProvincia { get; set; }
-        [Required(ErrorMessage = "El campo TipoDocumento es obligatorio.")]
+        [Required(ErrorMessage = "El campo Distrito es obligatorio.")]
         public int? IdDistrito { get; set; }
 
         public virtual Departamento? IdDepartamentoNavigation { get; set; }

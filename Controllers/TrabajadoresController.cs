@@ -30,6 +30,7 @@ namespace WebApplication26.Controllers
         }
 
         // GET: Trabajadores/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Trabajadores == null)
@@ -183,5 +184,17 @@ namespace WebApplication26.Controllers
         {
           return (_context.Trabajadores?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        public IActionResult GetProvincias(int idDepartamento)
+        {
+            var provincias = _context.Provincia.Where(p => p.IdDepartamento == idDepartamento).ToList();
+            return Json(provincias);
+        }
+
+        public IActionResult GetDistritos(int idProvincia)
+        {
+            var distritos = _context.Distritos.Where(d => d.IdProvincia == idProvincia).ToList();
+            return Json(distritos);
+        }
     }
 }
+

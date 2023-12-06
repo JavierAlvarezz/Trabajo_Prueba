@@ -111,6 +111,55 @@ ViewData["Title"] = "Create";
     <a asp-action="Index">Back to List</a>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Deshabilitar las listas de provincias y distritos al principio
+        $('#IdProvincia').prop('disabled', true);
+        $('#IdDistrito').prop('disabled', true);
+
+        $('#IdDepartamento').change(function () {
+            var idDepartamento = $(this).val();
+            if (idDepartamento !== "") {
+                $.getJSON('@Url.Action("GetProvincias", "Trabajadores")', { idDepartamento: idDepartamento }, function (data) {
+                    var items = '<option value="">Seleccionar</option>';
+                    $.each(data, function (i, provincia) {
+                        items += '<option value="' + provincia.id + '">' + provincia.nombreProvincia + '</option>';
+                    });
+                    $('#IdProvincia').html(items);
+                    // Habilitar la lista de provincias
+                    $('#IdProvincia').prop('disabled', false);
+                });
+            } else {
+                // Si no se selecciona un departamento, deshabilitar la lista de provincias y distritos
+                $('#IdProvincia').html('<option value="">Seleccionar</option>');
+                $('#IdProvincia').prop('disabled', true);
+                $('#IdDistrito').html('<option value="">Seleccionar</option>');
+                $('#IdDistrito').prop('disabled', true);
+            }
+        });
+
+        $('#IdProvincia').change(function () {
+            var idProvincia = $(this).val();
+            if (idProvincia !== "") {
+                $.getJSON('@Url.Action("GetDistritos", "Trabajadores")', { idProvincia: idProvincia }, function (data) {
+                    var items = '<option value="">Seleccionar</option>';
+                    $.each(data, function (i, distrito) {
+                        items += '<option value="' + distrito.id + '">' + distrito.nombreDistrito + '</option>';
+                    });
+                    $('#IdDistrito').html(items);
+                    // Habilitar la lista de distritos
+                    $('#IdDistrito').prop('disabled', false);
+                });
+            } else {
+                // Si no se selecciona una provincia, deshabilitar la lista de distritos
+                $('#IdDistrito').html('<option value="">Seleccionar</option>');
+                $('#IdDistrito').prop('disabled', true);
+            }
+        });
+    });
+</script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
