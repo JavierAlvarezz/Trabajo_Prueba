@@ -66,28 +66,38 @@
                         <option value="M">Masculino</option>
                     </select>
                     <span asp-validation-for="Sexo" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdDepartamento" class="control-label"></label>
-                    <select asp-for="IdDepartamento" class="form-control" asp-items="ViewBag.IdDepartamento">
-                        <option value="">Seleccionar</option>
-                    </select>
-                    <span asp-validation-for="IdDepartamento" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdProvincia" class="control-label"></label>
-                    <select asp-for="IdProvincia" class="form-control" asp-items="ViewBag.IdProvincia">
-                        <option value="">Seleccionar</option>
-                    </select>
-                    <span asp-validation-for="IdProvincia" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdDistrito" class="control-label"></label>
-                    <select asp-for="IdDistrito" class="form-control" asp-items="ViewBag.IdDistrito">
-                        <option value="">Seleccionar</option>
-                    </select>
-                    <span asp-validation-for="IdDistrito" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="IdDepartamento" class="control-label">Departamento:</label>
+                        <select asp-for="IdDepartamento" class="form-control" asp-items="@ViewBag.IdDepartamento">
+                            <option value="">Seleccionar </option>
+                            @foreach (var departamento in ViewBag.IdDepartamento)
+                            {
+                                <option value="@departamento.Value">@departamento.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IdProvincia" class="control-label">Provincia:</label>
+                        <select asp-for="IdProvincia" class="form-control" asp-items="@ViewBag.IdProvincia">
+                            <option value="">Seleccionar </option>
+                            @foreach (var departamento in ViewBag.IdProvincia)
+                            {
+                                <option value="@departamento.Value">@departamento.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IdDistrito" class="control-label">Distrito:</label>
+                        <select asp-for="IdDistrito" class="form-control" asp-items="@ViewBag.IdDistrito">
+                            <option value="">Seleccionar </option>
+                            @foreach (var departamento in ViewBag.IdDistrito)
+                            {
+                                <option value="@departamento.Value">@departamento.Text</option>
+                            }
+                        </select>
+                    </div>
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
                     <a asp-action="Index" class="btn btn-success">Regresar</a>

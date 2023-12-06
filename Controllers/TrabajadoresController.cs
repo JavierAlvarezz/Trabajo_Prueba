@@ -118,7 +118,29 @@ namespace WebApplication26.Controllers
             {
                 try
                 {
-                    _context.Update(trabajadore);
+
+                    var existenTrabajadore = await _context.Trabajadores
+                        .Include(t => t.IdDepartamentoNavigation)
+                        .Include(t => t.IdProvinciaNavigation)
+                        .Include(t => t.IdDistritoNavigation)
+                        .FirstOrDefaultAsync(m => m.Id == id);
+
+                    if (existenTrabajadore == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Actualizar las propiedades del objeto cargado con las propiedades del objeto editado
+                    existenTrabajadore.TipoDocumento = trabajadore.TipoDocumento;
+                    existenTrabajadore.NumeroDocumento = trabajadore.NumeroDocumento;
+                    existenTrabajadore.Nombres = trabajadore.Nombres;
+                    existenTrabajadore.Sexo = trabajadore.Sexo;
+                    existenTrabajadore.IdDepartamento = trabajadore.IdDepartamento;
+                    existenTrabajadore.IdProvincia = trabajadore.IdProvincia;
+                    existenTrabajadore.IdDistrito = trabajadore.IdDistrito;
+
+                    // Actualizar y guardar los cambios
+                    _context.Update(existenTrabajadore);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -134,9 +156,12 @@ namespace WebApplication26.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "Id", trabajadore.IdDepartamento);
-            ViewData["IdDistrito"] = new SelectList(_context.Distritos, "Id", "Id", trabajadore.IdDistrito);
-            ViewData["IdProvincia"] = new SelectList(_context.Provincia, "Id", "Id", trabajadore.IdProvincia);
+
+            // Cargar las listas desplegables con los nombres correctos
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "Id", "NombreDepartamento", trabajadore.IdDepartamento);
+            ViewData["IdDistrito"] = new SelectList(_context.Distritos, "Id", "NombreDistrito", trabajadore.IdDistrito);
+            ViewData["IdProvincia"] = new SelectList(_context.Provincia, "Id", "NombreProvincia", trabajadore.IdProvincia);
+
             return View(trabajadore);
         }
 
