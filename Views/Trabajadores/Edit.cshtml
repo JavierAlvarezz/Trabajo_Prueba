@@ -1,0 +1,99 @@
+﻿@model WebApplication26.Models.Trabajadore
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<body>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://estaticos-cdn.prensaiberica.es/clip/cd7195f0-264d-4884-b6a7-d277fb0b9c5c_alta-libre-aspect-ratio_default_0.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px; /* Ajusta según sea necesario */
+        }
+
+        h1 {
+            color: white; /* Cambia el color del texto según sea necesario */
+        }
+
+
+    </style>
+
+
+<h1>Editar</h1>
+
+
+<hr />
+    <div class=" form-container">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TipoDocumento" class="control-label"></label>
+                <input asp-for="TipoDocumento" class="form-control" />
+                <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroDocumento" class="control-label"></label>
+                <input asp-for="NumeroDocumento" class="form-control" />
+                <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sexo" class="control-label"></label>
+                <input asp-for="Sexo" class="form-control" />
+                <span asp-validation-for="Sexo" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="IdDepartamento" class="control-label"></label>
+                    <select asp-for="IdDepartamento" class="form-control" asp-items="ViewBag.IdDepartamento">
+                        <option value="">Seleccionar</option>
+                    </select>
+                    <span asp-validation-for="IdDepartamento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdProvincia" class="control-label"></label>
+                    <select asp-for="IdProvincia" class="form-control" asp-items="ViewBag.IdProvincia">
+                        <option value="">Seleccionar</option>
+                    </select>
+                    <span asp-validation-for="IdProvincia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdDistrito" class="control-label"></label>
+                    <select asp-for="IdDistrito" class="form-control" asp-items="ViewBag.IdDistrito">
+                        <option value="">Seleccionar</option>
+                    </select>
+                    <span asp-validation-for="IdDistrito" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+        <a asp-action="Index" class="btn btn-success">Regresar</a>
+</div>
+   </body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+ 
