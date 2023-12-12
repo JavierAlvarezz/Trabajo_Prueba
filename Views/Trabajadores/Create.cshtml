@@ -17,7 +17,6 @@ ViewData["Title"] = "Create";
 
 
 
-<link rel="stylesheet" href="~/css/styles.css" />
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="row border rounded-5 p-3 bg-white shadow box-area">
         <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
@@ -29,7 +28,7 @@ ViewData["Title"] = "Create";
            
         </div>
 
-        <div class="col-md-6 right-box">
+            <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -39,7 +38,7 @@ ViewData["Title"] = "Create";
                     <select asp-for="TipoDocumento" class="form-control">
                         <option value="">Seleccionar</option>
                         <option value="DNI">DNI</option>
-                        <option value="CNN">CNN</option>
+                    
                     </select>
                 </div>
 

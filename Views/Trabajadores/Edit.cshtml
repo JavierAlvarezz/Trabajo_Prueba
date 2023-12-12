@@ -7,57 +7,54 @@
 
 <body>
     <style>
+
         body {
             font-family: 'Poppins', sans-serif;
             background-image: url('https://estaticos-cdn.prensaiberica.es/clip/cd7195f0-264d-4884-b6a7-d277fb0b9c5c_alta-libre-aspect-ratio_default_0.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            margin: 0;
-            min-height: 100vh;
-            position: relative;
         }
-
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px; /* Ajusta según sea necesario */
-        }
-
-        h1 {
-            color: white;
-            text-align :center;
-        }
-7
-
     </style>
 
 
-<h1>Editar</h1>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+                 style="background: radial-gradient(circle,#ffffff , #87cefa );">
+                <div class="featured-image mb-3">
+                    <img src="https://myper.com.pe/_nuxt/img/myper-consulting.d4ac796.png" class="img-fluid" style="width: 250px;">
+                </div>
 
 
-<hr />
-    <div class=" form-container">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="TipoDocumento" class="control-label"></label>
-                <input asp-for="TipoDocumento" class="form-control" />
-                <span asp-validation-for="TipoDocumento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NumeroDocumento" class="control-label"></label>
-                <input asp-for="NumeroDocumento" class="form-control" />
-                <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
-            </div>
+
+
+
+
+    <div class="form-container">
+        <div class="col-md-4">
+
+            <form asp-action="Edit">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="TipoDocumento" class="control-label">Tipo de Documento:</label>
+                    <input asp-for="TipoDocumento" class="form-control" readonly />
+                    <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumeroDocumento" class="control-label"></label>
+                    <input asp-for="NumeroDocumento" class="form-control" />
+                    <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nombres" class="control-label"></label>
+                    <input asp-for="Nombres" class="form-control" />
+                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Sexo" class="control-label">Sexo:</label>
                     <select asp-for="Sexo" class="form-control">
@@ -76,64 +73,68 @@
                             }
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label asp-for="IdProvincia" class="control-label">Provincia:</label>
-                        <select asp-for="IdProvincia" class="form-control" asp-items="@ViewBag.IdProvincia">
+                        <select asp-for="IdProvincia" id="IdProvincia" class="form-control" asp-items="@ViewBag.IdProvincia">
                             <option value="">Seleccionar </option>
-                            @foreach (var departamento in ViewBag.IdProvincia)
+                            @foreach (var provincia in ViewBag.IdProvincia)
                             {
-                                <option value="@departamento.Value">@departamento.Text</option>
+                                <option value="@provincia.Value">@provincia.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdDistrito" class="control-label">Distrito:</label>
+                        <select asp-for="IdDistrito" id="IdDistrito" class="form-control" asp-items="@ViewBag.IdDistrito">
+                            <option value="">Seleccionar </option>
+                            @foreach (var distrito in ViewBag.IdDistrito)
+                            {
+                                <option value="@distrito.Value">@distrito.Text</option>
                             }
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="IdDistrito" class="control-label">Distrito:</label>
-                        <select asp-for="IdDistrito" class="form-control" asp-items="@ViewBag.IdDistrito">
-                            <option value="">Seleccionar </option>
-                            @foreach (var departamento in ViewBag.IdDistrito)
-                            {
-                                <option value="@departamento.Value">@departamento.Text</option>
-                            }
-                        </select>
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-success">Regresar</a>
                     </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-                    <a asp-action="Index" class="btn btn-success">Regresar</a>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-
 
    </body>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        // Deshabilitar las listas de provincias y distritos al principio
+        // Limpiar campos de departamento, provincia y distrito al cargar la página
+        $('#IdDepartamento').val('');
+        $('#IdProvincia').val('');
+        $('#IdDistrito').val('');
+
         $('#IdProvincia').prop('disabled', true);
         $('#IdDistrito').prop('disabled', true);
 
         $('#IdDepartamento').change(function () {
             var idDepartamento = $(this).val();
             if (idDepartamento !== "") {
-                $.getJSON('@Url.Action("GetProvincias", "Trabajadores")', { idDepartamento: idDepartamento }, function (data) {
-                    var items = '<option value="">Seleccionar</option>';
-                    $.each(data, function (i, provincia) {
-                        items += '<option value="' + provincia.id + '">' + provincia.nombreProvincia + '</option>';
+                $('#IdProvincia').prop('disabled', true);
+                $('#IdDistrito').prop('disabled', true);
+
+                $.getJSON('@Url.Action("GetProvincias", "Trabajadores")', { idDepartamento: idDepartamento })
+                    .done(function (data) {
+                        console.log(data);
+                        var items = '<option value="">Seleccionar</option>';
+                        $.each(data, function (i, provincia) {
+                            items += '<option value="' + provincia.id + '">' + provincia.nombreProvincia + '</option>';
+                        });
+                        $('#IdProvincia').html(items);
+                        $('#IdProvincia').prop('disabled', false);
+                    })
+                    .fail(function (jqxhr, textStatus, error) {
+                        console.log("Error de solicitud: " + textStatus + ", " + error);
                     });
-                    $('#IdProvincia').html(items);
-                    // Habilitar la lista de provincias
-                    $('#IdProvincia').prop('disabled', false);
-                });
             } else {
-                // Si no se selecciona un departamento, deshabilitar la lista de provincias y distritos
                 $('#IdProvincia').html('<option value="">Seleccionar</option>');
                 $('#IdProvincia').prop('disabled', true);
                 $('#IdDistrito').html('<option value="">Seleccionar</option>');
@@ -144,20 +145,30 @@
         $('#IdProvincia').change(function () {
             var idProvincia = $(this).val();
             if (idProvincia !== "") {
-                $.getJSON('@Url.Action("GetDistritos", "Trabajadores")', { idProvincia: idProvincia }, function (data) {
-                    var items = '<option value="">Seleccionar</option>';
-                    $.each(data, function (i, distrito) {
-                        items += '<option value="' + distrito.id + '">' + distrito.nombreDistrito + '</option>';
+                $('#IdDistrito').prop('disabled', true);
+
+                $.getJSON('@Url.Action("GetDistritos", "Trabajadores")', { idProvincia: idProvincia })
+                    .done(function (data) {
+                        console.log(data);
+                        var items = '<option value="">Seleccionar</option>';
+                        $.each(data, function (i, distrito) {
+                            items += '<option value="' + distrito.id + '">' + distrito.nombreDistrito + '</option>';
+                        });
+                        $('#IdDistrito').html(items);
+                        $('#IdDistrito').prop('disabled', false);
+                    })
+                    .fail(function (jqxhr, textStatus, error) {
+                        console.log("Error de solicitud: " + textStatus + ", " + error);
                     });
-                    $('#IdDistrito').html(items);
-                    // Habilitar la lista de distritos
-                    $('#IdDistrito').prop('disabled', false);
-                });
             } else {
-                // Si no se selecciona una provincia, deshabilitar la lista de distritos
                 $('#IdDistrito').html('<option value="">Seleccionar</option>');
                 $('#IdDistrito').prop('disabled', true);
             }
         });
     });
 </script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
